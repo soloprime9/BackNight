@@ -12,7 +12,7 @@ app.use(cors({
     origin: "https://nightf-qn3y.vercel.app", // Replace with your frontend URL
     methods: ["GET", "POST", "OPTIONS"],      // Allow these HTTP methods
     allowedHeaders: ["Content-Type"],         // Allow these headers
-    credentials: true                         // Allow credentials (if required)
+    credentials: false                         // Allow credentials (if required)
 }));
 app.use(express.json());
 
@@ -29,9 +29,7 @@ app.get("/", (req, res) => {
 
 // API endpoint to generate thumbnail URLs
 app.post("/api/get-thumbnails", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://nightf-qn3y.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  
 
   const { videoUrl } = req.body;
 
@@ -61,7 +59,8 @@ app.get("/api/download", async (req, res) => {
   const { url } = req.query;
 
   try {
-    const response = await axios.get(url, { responseType: "arraybuffer" });
+    const response = await axios.get(url, { responseType: "arraybuffer", // Ensure the response is treated as binary
+      withCredentials: false      // Prevent cookies from being sent });
     const contentType = response.headers["content-type"];
 
     res.setHeader("Content-Type", contentType);
