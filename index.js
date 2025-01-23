@@ -1,19 +1,19 @@
 const express = require("express");
-const cors = require("cors");
+
 const axios = require("axios");
 
 const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(
-  cors({
-    origin: "https://nightf-qn3y.vercel.app", // Replace with your frontend's origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-    credentials: true, // If you need cookies or authentication headers
-  })
-);
+const cors = require("cors");
+
+app.use(cors({
+    origin: "https://nightf-qn3y.vercel.app", // Replace with your frontend URL
+    methods: ["GET", "POST", "OPTIONS"],      // Allow these HTTP methods
+    allowedHeaders: ["Content-Type"],         // Allow these headers
+    credentials: true                         // Allow credentials (if required)
+}));
 app.use(express.json());
 
 // Helper function to extract video ID from URL
@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
 
 // API endpoint to generate thumbnail URLs
 app.post("/api/get-thumbnails", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://nightf-qn3y.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.sendStatus(204); // No Content
   const { videoUrl } = req.body;
 
   if (!videoUrl) {
