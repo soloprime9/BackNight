@@ -16,6 +16,10 @@ const extractVideoId = (url) => {
   return match ? match[1] : null;
 };
 
+app.get("/", (req, res) => {
+  res.send("Hello World Bro");
+});
+
 // API endpoint to generate thumbnail URLs
 app.post("/api/get-thumbnails", (req, res) => {
   const { videoUrl } = req.body;
