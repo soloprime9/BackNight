@@ -6,9 +6,14 @@ const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(cors({
-  origin: "https://nightf-qn3y.vercel.app"
-}));
+app.use(
+  cors({
+    origin: "https://nightf-qn3y.vercel.app", // Replace with your frontend's origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // If you need cookies or authentication headers
+  })
+);
 app.use(express.json());
 
 // Helper function to extract video ID from URL
