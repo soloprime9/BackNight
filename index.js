@@ -59,15 +59,21 @@ app.get("/api/download", async (req, res) => {
   const { url } = req.query;
 
   try {
-    const response = await axios.get(url, { responseType: "arraybuffer", // Ensure the response is treated as binary
-      withCredentials: false      // Prevent cookies from being sent });
+    // Fetch the thumbnail without cookies
+    const response = await axios.get(url, {
+      responseType: "arraybuffer", // Ensure the response is treated as binary
+      withCredentials: false      // Prevent cookies from being sent
+    });
+
     const contentType = response.headers["content-type"];
 
+    // Set headers for the downloaded image
     res.setHeader("Content-Type", contentType);
     res.setHeader(
       "Content-Disposition",
       `attachment; filename=thumbnail-${Date.now()}.jpg`
     );
+
     res.send(response.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to download image" });
