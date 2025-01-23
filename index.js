@@ -30,9 +30,9 @@ app.get("/", (req, res) => {
 // API endpoint to generate thumbnail URLs
 app.post("/api/get-thumbnails", (req, res) => {
   res.header("Access-Control-Allow-Origin", "https://nightf-qn3y.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    res.sendStatus(204); // No Content
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+
   const { videoUrl } = req.body;
 
   if (!videoUrl) {
@@ -54,6 +54,7 @@ app.post("/api/get-thumbnails", (req, res) => {
 
   res.json({ videoId, thumbnails });
 });
+
 
 // Proxy endpoint for downloading images
 app.get("/api/download", async (req, res) => {
