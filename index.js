@@ -3,7 +3,7 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-const PORT = 5000;
+
 
 // Middleware
 const cors = require("cors");
@@ -75,6 +75,5 @@ app.get("/api/download", async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// API endpoints...
+module.exports = app; // Export the app for Vercel
