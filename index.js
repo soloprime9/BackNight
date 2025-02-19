@@ -9,7 +9,7 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors({
-    origin: "https://www.okhatrimaza.shop", // Replace with your frontend URL
+    origin: "*", // Replace with your frontend URL
     methods: ["GET", "POST", "OPTIONS"],      // Allow these HTTP methods
     allowedHeaders: ["Content-Type"],         // Allow these headers
     credentials: false                         // Allow credentials (if required)
